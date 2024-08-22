@@ -20,7 +20,7 @@ public class BankManagement {
 
             switch (option) {
                 case 1:
-                    register(scanner);
+                    SignUp(scanner);
                     break;
                 case 2:
                     login(scanner);
@@ -44,7 +44,7 @@ public class BankManagement {
         }
     }
 
-    private static void register(Scanner scanner) {
+    private static void SignUp(Scanner scanner) {
         scanner.nextLine();
         System.out.println("Enter name: ");
         String name = scanner.nextLine();
@@ -55,17 +55,25 @@ public class BankManagement {
         String password = scanner.nextLine();
 
 
-        User user = new User();
+
+        User user =new User();
         user.setName(name);
         user.setEmail(email);
         user.setPassword(password);
         user.setBalance(0);
+        currentUser=user;
+
+
+
 
         if (userDAO.registerUser(user)) {
-            System.out.println("User registered successfully.");
+            System.out.println("Sign Up Successfull");
         } else {
             System.out.println("Registration failed.");
         }
+        user=userDAO.loginUser(email,password);
+
+
     }
 
     private static void login(Scanner scanner) {
